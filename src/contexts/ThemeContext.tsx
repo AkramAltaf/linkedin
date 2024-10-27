@@ -6,56 +6,11 @@ import React, {
   useMemo,
   ReactNode,
 } from "react";
-import {
-  ThemeProvider as StyledThemeProvider,
-  DefaultTheme,
-} from "styled-components";
-import {
-  createTheme,
-  ThemeProvider as MUIThemeProvider,
-} from "@mui/material/styles";
+import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import { ThemeProvider as MUIThemeProvider } from "@mui/material/styles";
+import { lightTheme, darkTheme, muiLightTheme, muiDarkTheme } from "../theme";
 
-// Light and Dark Themes for styled-components
-const lightTheme: DefaultTheme = {
-  colors: {
-    primary: "#0a66c2",
-    background: "#f3f2ef",
-    textPrimary: "#000000",
-    textSecondary: "#666666",
-    border: "#e6e6e6",
-  },
-};
-
-const darkTheme: DefaultTheme = {
-  colors: {
-    primary: "#0a66c2",
-    background: "#1c1c1c",
-    textPrimary: "#ffffff",
-    textSecondary: "#b3b3b3",
-    border: "#3a3a3a",
-  },
-};
-
-// Light and Dark Themes for Material UI
-const muiLightTheme = createTheme({
-  palette: {
-    primary: { main: "#0a66c2" },
-    background: { default: "#f3f2ef" },
-    text: { primary: "#000000", secondary: "#666666" },
-    divider: "#e6e6e6",
-  },
-});
-
-const muiDarkTheme = createTheme({
-  palette: {
-    primary: { main: "#0a66c2" },
-    background: { default: "#1c1c1c" },
-    text: { primary: "#ffffff", secondary: "#b3b3b3" },
-    divider: "#3a3a3a",
-  },
-});
-
-// Context and Hook Definitions
+// Theme Context Type
 type ThemeContextType = {
   isDarkMode: boolean;
   toggleTheme: () => void;
@@ -71,7 +26,7 @@ export const useThemeContext = () => {
   return context;
 };
 
-// Helper Function to Get Initial Theme from LocalStorage
+// Get Initial Theme from LocalStorage
 const getInitialTheme = (): boolean => {
   const savedTheme = localStorage.getItem("theme");
   return savedTheme ? savedTheme === "dark" : false;
@@ -87,6 +42,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
   }, [isDarkMode]);
 
+  // Memoized Themes
   const muiTheme = useMemo(
     () => (isDarkMode ? muiDarkTheme : muiLightTheme),
     [isDarkMode]
@@ -96,12 +52,16 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     [isDarkMode]
   );
 
+  // Update body background-color whenever the theme changes
+  useEffect(() => {
+    document.body.style.backgroundColor = styledTheme.colors.bodyBackground;
+  }, [styledTheme]);
+
   return (
     <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
       <MUIThemeProvider theme={muiTheme}>
         <StyledThemeProvider theme={styledTheme}>
-          <div className={isDarkMode ? "dark" : ""}>{children}</div>{" "}
-          {/* Tailwind dark mode */}
+          <div className={isDarkMode ? "dark" : ""}>{children}</div>
         </StyledThemeProvider>
       </MUIThemeProvider>
     </ThemeContext.Provider>
