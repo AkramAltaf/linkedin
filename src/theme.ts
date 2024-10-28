@@ -6,12 +6,14 @@ export const lightTheme: DefaultTheme = {
   colors: {
     primary: "#0a66c2",
     background: "#f3f2ef",
-    bodyBackground: "#ffffff",
+    bodyBackground: "#f4f2ee",
     textPrimary: "#000000",
     textSecondary: "#666666",
     border: "#e6e6e6",
-    navbarBackground: "#ffffff", // Navbar light background
-    navbarText: "#0a66c2", // Navbar light text color
+    navbarBackground: "#ffffff", 
+    navbarText: "rgb(0 0 0 / .6);", 
+    searchBarBackground: "#EDF3F8",
+    textHover: "#191919"
   },
 };
 
@@ -20,12 +22,14 @@ export const darkTheme: DefaultTheme = {
   colors: {
     primary: "#0a66c2",
     background: "#1c1c1c",
-    bodyBackground: "#121212",
+    bodyBackground: "#23272F",
     textPrimary: "#ffffff",
     textSecondary: "#b3b3b3",
     border: "#3a3a3a",
-    navbarBackground: "#1c1c1c", // Navbar dark background
-    navbarText: "#ffffff", // Navbar dark text color
+    navbarBackground: "#23272F", 
+    navbarText: "#E6E7EB", 
+    searchBarBackground: "#343945",
+    textHover: "#E6E7EB"
   },
 };
 
