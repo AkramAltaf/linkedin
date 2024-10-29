@@ -39,7 +39,7 @@ const Routes: React.FC = () => {
     { path: "/signup", element: <Signup /> },
   ]);
 
-  return <RouterProvider router={router} />; // Use RouterProvider to provide the router
+  return <RouterProvider router={router} />;
 };
 
 export default Routes;
