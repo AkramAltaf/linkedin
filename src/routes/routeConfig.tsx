@@ -12,7 +12,7 @@ const routes: RouteObject[] = [
     element: <Layout />,
     children: [
       {
-        path: "/feed",
+        path: "/",
         element: <Home />,
       },
       {
