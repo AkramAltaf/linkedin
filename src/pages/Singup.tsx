@@ -46,7 +46,7 @@ const FooterText = styled(Typography)`
   color: #767676;
 `;
 
-const Login: React.FC = () => {
+const Signup: React.FC = () => {
   return (
     <LoginContainer>
       <FormContainer>
@@ -90,4 +90,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Signup;
