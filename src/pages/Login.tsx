@@ -107,7 +107,7 @@ const Login: React.FC = () => {
         <Typography>
           New to LinkedIn? <SignupLink href="/signup">Join now</SignupLink>
         </Typography>
-        <FooterText>© 2024 LinkedIn</FooterText>
+        <FooterText>© 2024 LinkedIn Corporation</FooterText>
       </FormContainer>
     </LoginContainer>
   );

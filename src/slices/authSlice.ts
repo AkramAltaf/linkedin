@@ -2,12 +2,11 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AuthState, Credentials, User } from "../@types/userType";
 
-const initialState: AuthState = {
-  isAuthenticated: false,
-  user: null,
-  loading: false,
-  error: null,
-};
+// Load initial state from localStorage, if available
+const userData = localStorage.getItem("user");
+const initialState: AuthState = userData
+  ? JSON.parse(userData)
+  : { isAuthenticated: false, user: null, loading: false, error: null };
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
@@ -35,6 +34,7 @@ const authSlice = createSlice({
     logout(state) {
       state.isAuthenticated = false;
       state.user = null;
+      localStorage.removeItem("user"); // Clear localStorage on logout
     },
   },
   extraReducers: (builder) => {
@@ -47,6 +47,9 @@ const authSlice = createSlice({
         state.loading = false;
         state.isAuthenticated = true;
         state.user = { email: action.payload.email, id: action.payload.id };
+
+        // Save the state to localStorage on successful login
+        localStorage.setItem("user", JSON.stringify(state));
       })
       .addCase(loginUser.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;

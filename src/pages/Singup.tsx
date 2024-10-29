@@ -84,7 +84,7 @@ const Signup: React.FC = () => {
         <Typography>
           Already on LinkedIn? <SignupLink href="/login">Sign in</SignupLink>
         </Typography>
-        <FooterText>© 2024 LinkedIn</FooterText>
+        <FooterText>© 2024 LinkedIn Corporation</FooterText>
       </FormContainer>
     </LoginContainer>
   );
