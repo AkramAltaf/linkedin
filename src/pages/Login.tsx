@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, TextField, Typography, Box, Link } from "@mui/material";
 import { styled } from "@mui/system";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../slices/authSlice";
+import { RootState, AppDispatch } from "../store/store";
+import { Navigate } from "react-router-dom";
 
 const LoginContainer = styled(Box)`
   display: flex;
@@ -47,6 +51,23 @@ const FooterText = styled(Typography)`
 `;
 
 const Login: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { isAuthenticated, loading, error } = useSelector(
+    (state: RootState) => state.auth
+  );
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(loginUser({ email, password }));
+  };
+
+  if (isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <LoginContainer>
       <FormContainer>
@@ -57,22 +78,32 @@ const Login: React.FC = () => {
         <Typography variant="h5" fontWeight="bold">
           Sign in to LinkedIn
         </Typography>
-        <TextField
-          label="Email or Phone"
-          variant="outlined"
-          fullWidth
-          size="small"
-        />
-        <TextField
-          label="Password"
-          type="password"
-          variant="outlined"
-          fullWidth
-          size="small"
-        />
-        <LoginButton variant="contained" fullWidth>
-          Sign in
-        </LoginButton>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-[20px]">
+          <TextField
+            label="Email or Phone"
+            variant="outlined"
+            fullWidth
+            size="small"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <TextField
+            label="Password"
+            type="password"
+            variant="outlined"
+            fullWidth
+            size="small"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          {loading && <p>Loading...</p>}
+          {error && <p className="text-red-500">{error}</p>}
+          <LoginButton type="submit" variant="contained" fullWidth>
+            Sign in
+          </LoginButton>
+        </form>
         <Typography>
           New to LinkedIn? <SignupLink href="/signup">Join now</SignupLink>
         </Typography>

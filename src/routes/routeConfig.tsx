@@ -9,47 +9,28 @@ import ProtectedRoute from "./ProtectedRoute";
 import Login from "../pages/Login";
 import Signup from "../pages/Singup";
 
+const isAuthenticated = true;
+
 const routes: RouteObject[] = [
   {
     path: "/",
-    element: <Layout />,
+    element: <ProtectedRoute isAuthenticated={isAuthenticated} />,
     children: [
       {
         path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/mynetwork",
-        element: <ProtectedRoute />, // Protect MyNetwork route
+        element: <Layout />,
         children: [
-          {
-            path: "",
-            element: <MyNetwork />,
-          },
+          { path: "/", element: <Home /> },
+          { path: "mynetwork", element: <MyNetwork /> },
+          { path: "jobs", element: <Jobs /> },
+          { path: "messaging", element: <Messaging /> },
+          { path: "notifications", element: <Notifications /> },
         ],
-      },
-      {
-        path: "jobs",
-        element: <Jobs />,
-      },
-      {
-        path: "messaging",
-        element: <Messaging />,
-      },
-      {
-        path: "notifications",
-        element: <Notifications />,
       },
     ],
   },
-  {
-    path: "/login",
-    element: <Login />, // Directly render the Login component
-  },
-  {
-    path: "/signup",
-    element: <Signup />, // Directly render the Signup component
-  },
+  { path: "/login", element: <Login /> },
+  { path: "/signup", element: <Signup /> },
 ];
 
 const router = createBrowserRouter(routes);

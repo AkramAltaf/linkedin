@@ -1,9 +1,12 @@
+import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
-const ProtectedRoute: React.FC = () => {
-  const isAuthenticated = false;
+interface ProtectedRouteProps {
+  isAuthenticated: boolean;
+}
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ isAuthenticated }) => {
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;
