@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
       <Container>
         <div className="flex justify-between h-[60px]">
           <Box className="flex items-center gap-1 w-full">
-            <Link to="/">
+            <Link to="/feed">
               <Logo>
                 <LinkedIn />
               </Logo>
@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
           </Box>
 
           <NavIcons>
-            <NavLinkContainer to="/" className="icon">
+            <NavLinkContainer to="/feed" className="icon">
               <House />
               <span>Home</span>
             </NavLinkContainer>
