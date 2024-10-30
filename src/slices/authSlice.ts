@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AuthState, Credentials, User } from "../@types/userType";
 
-// Load initial state from localStorage, if available
 const userData = localStorage.getItem("user");
 const initialState: AuthState = userData
   ? JSON.parse(userData)
