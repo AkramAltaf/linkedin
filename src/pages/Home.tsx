@@ -1,9 +1,6 @@
 import React from "react";
+import FeedEntry from "../components/feed/FeedEntry";
 
-const Home: React.FC = () => (
-  <div>
-    <h1>Home Page</h1>
-  </div>
-);
+const Home: React.FC = () => <FeedEntry />;
 
 export default Home;
