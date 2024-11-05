@@ -6,39 +6,49 @@ import {
   Article,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import LinkedInModal from "../LinkedInModal";
 
 const FeedEntry: React.FC = () => {
+  const [feedModalOpen, setFeedModalOpen] = useState<boolean>(false);
+
+  const handleOpen = () => {
+    setFeedModalOpen(true);
+  };
+
+  const handleClose = () => {
+    setFeedModalOpen(false);
+  };
+
   return (
     <div className="border border-gray-300 bg-white rounded-xl px-4 pt-4 pb-2">
       <div className="flex items-center gap-2 mb-2">
         <Avatar style={{ height: "48px", width: "48px" }} />
-        <FeedEntryButton>Start a post, try writing with AI</FeedEntryButton>
+        <FeedEntryButton onClick={handleOpen}>
+          Start a post, try writing with AI
+        </FeedEntryButton>
+        <LinkedInModal
+          open={feedModalOpen}
+          onClose={handleClose}
+          title="title"
+          content="content"
+          width={"700px"}
+        />
       </div>
       <div className="flex items-center justify-around">
-        <Button
+        <LinkButton
           startIcon={<PhotoSizeSelectActual style={{ color: "#378FE9" }} />}
-          className=""
-          sx={{
-            backgroundColor: "transparent",
-            padding: "0.75rem 0.5rem",
-            color: "#666666",
-            textTransform: "none",
-            "&:hover": {
-              backgroundColor: "#F3F3F3",
-              color: "#181818",
-            },
-          }}
         >
           Media
-        </Button>
-        <Link to="/" className="">
-          <QuestionAnswer />
+        </LinkButton>
+        <StyledLink to="/">
+          <QuestionAnswer style={{ color: "#C37D16" }} />
           Contribute expertise
-        </Link>
-        <Link to="/">
-          <Article />
+        </StyledLink>
+        <StyledLink to="/">
+          <Article style={{ color: "#E06847" }} />
           Write article
-        </Link>
+        </StyledLink>
       </div>
     </div>
   );
@@ -65,5 +75,39 @@ const FeedEntryButton = styled(Button)`
       background-color: #f7f7f7;
       color: #181818;
     }
+  }
+`;
+
+const LinkButton = styled(Button)`
+  && {
+    background-color: transparent;
+    padding: 0.75rem;
+    text-transform: none;
+    color: #181818;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: #f3f3f3;
+      color: #181818;
+    }
+  }
+`;
+
+const StyledLink = styled(Link)`
+  background-color: transparent;
+  padding: 0.75rem;
+  text-transform: none;
+  color: #181818;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: #f3f3f3;
+    color: #181818;
+  }
+
+  svg {
+    margin-right: 0.5rem;
   }
 `;
