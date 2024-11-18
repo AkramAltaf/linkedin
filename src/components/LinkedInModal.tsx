@@ -2,6 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import styled from "styled-components";
 
 interface LinkedInModalProps {
   open: boolean;
@@ -18,18 +19,6 @@ const LinkedInModal: React.FC<LinkedInModalProps> = ({
   content = "Modal Content",
   width = 400,
 }) => {
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: width,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
-
   return (
     <Modal
       open={open}
@@ -37,7 +26,7 @@ const LinkedInModal: React.FC<LinkedInModalProps> = ({
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
+      <ModalContainer width={width}>
         {title && (
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {title}
@@ -48,9 +37,21 @@ const LinkedInModal: React.FC<LinkedInModalProps> = ({
             {content}
           </Typography>
         )}
-      </Box>
+      </ModalContainer>
     </Modal>
   );
 };
 
 export default LinkedInModal;
+
+const ModalContainer = styled(Box)<{ width?: number | string }>`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: ${(props) => props.width || "400px"};
+  background-color: ${(props) => props.theme.colors.background || "white"};
+  border: 2px solid #000;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.2); // Equivalent to boxShadow: 24 in Material UI
+  padding: 1rem;
+`;
