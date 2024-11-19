@@ -13,7 +13,7 @@ export const lightTheme: DefaultTheme = {
     navbarBackground: "#ffffff", 
     navbarText: "rgb(0 0 0 / .6);", 
     searchBarBackground: "#EDF3F8",
-    textHover: "#191919"
+    textHover: "#191919",
   },
 };
 

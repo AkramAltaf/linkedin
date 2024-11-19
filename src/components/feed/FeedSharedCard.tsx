@@ -18,39 +18,6 @@ interface FeedSharedCardProps {
   postImage?: string;
 }
 
-// Styled card to use theme values
-const StyledCard = styled(Card)`
-  margin-bottom: 1.5rem;
-  border-radius: 0.75rem;
-  background-color: ${({ theme }) => theme.colors.background};
-  color: ${({ theme }) => theme.colors.textPrimary};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-`;
-
-// Styled card header
-const StyledHeader = styled(CardHeader)`
-  .MuiCardHeader-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: ${({ theme }) => theme.colors.textPrimary};
-  }
-  .MuiCardHeader-subheader {
-    font-size: 0.875rem;
-    color: ${({ theme }) => theme.colors.textSecondary};
-  }
-`;
-
-// Action buttons
-const ActionButton = styled(Button)`
-  text-transform: none;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.textSecondary};
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary};
-  }
-`;
-
 const FeedSharedCard: React.FC<FeedSharedCardProps> = ({
   userAvatar,
   userName,
@@ -58,7 +25,7 @@ const FeedSharedCard: React.FC<FeedSharedCardProps> = ({
   postContent,
   postImage,
 }) => {
-  const theme = useTheme(); // Access the current theme
+  const theme = useTheme();
 
   return (
     <StyledCard>
@@ -93,3 +60,34 @@ const FeedSharedCard: React.FC<FeedSharedCardProps> = ({
 };
 
 export default FeedSharedCard;
+
+const StyledCard = styled(Card)`
+  && {
+    border-radius: 0.75rem;
+    background-color: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.textPrimary};
+    border: 1px solid ${({ theme }) => theme.colors.border};
+    box-shadow: none;
+  }
+`;
+
+const StyledHeader = styled(CardHeader)`
+  .MuiCardHeader-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.textPrimary};
+  }
+  .MuiCardHeader-subheader {
+    font-size: 0.875rem;
+    color: ${({ theme }) => theme.colors.textSecondary};
+  }
+`;
+
+const ActionButton = styled(Button)`
+  text-transform: none;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
+`;
